@@ -82,7 +82,7 @@ class Dashboard extends StatelessWidget {
       Text('Let’s make today productive.',style:TextStyle(color:Theme.of(context).colorScheme.onSurfaceVariant)),
     ])),const CircleAvatar(backgroundColor:C.soft,child:Icon(Icons.school,color:C.ink))]),
     const SizedBox(height:20),
-    InkWell(borderRadius:BorderRadius.circular(28),onTap:onTimer,child:Container(padding:const EdgeInsets.all(22),decoration:BoxDecoration(gradient:const LinearGradient(colors:[Color(0xFFC8B4FF),Color(0xFFE3D9FF)]),borderRadius:BorderRadius.circular(28)),child:Row(children:[
+    InkWell(borderRadius:BorderRadius.circular(28),onTap:onTimer,child:Container(padding:const EdgeInsets.all(22),decoration:BoxDecoration(color:C.bg,borderRadius:BorderRadius.circular(28),boxShadow:const [BoxShadow(color:Color(0xFFD0D8E5),blurRadius:22,offset:Offset(9,9)),BoxShadow(color:Color(0xFFFFFFFF),blurRadius:22,offset:Offset(-9,-9))]),child:Row(children:[
       Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
         const Text('Small\nSteps, Big Results',style:TextStyle(fontSize:27,fontWeight:FontWeight.w900,height:.98)),
         const SizedBox(height:10),const Text('Focus for a little while today and build a better tomorrow.'),
@@ -96,16 +96,16 @@ class Dashboard extends StatelessWidget {
     ...[('Islamic History','8:00 – 9:00 AM',Icons.account_balance,C.soft),('Arabic Language','10:00 – 11:00 AM',Icons.translate,C.mint),('Revision','4:00 – 5:00 PM',Icons.auto_stories,C.pink)].map((x)=>ListTile(
       onTap:onTimer,leading:CircleAvatar(backgroundColor:x.$4,child:Icon(x.$3,color:C.ink)),title:Text(x.$1,style:const TextStyle(fontWeight:FontWeight.w700)),subtitle:Text(x.$2),trailing:const Icon(Icons.play_circle_fill_rounded))),
     const SizedBox(height:12),
-    Container(padding:const EdgeInsets.all(18),decoration:BoxDecoration(color:C.yellow.withOpacity(.4),borderRadius:BorderRadius.circular(22)),child:const Row(children:[Icon(Icons.local_fire_department,size:32),SizedBox(width:12),Expanded(child:Text('7 day streak\nKeep your momentum going today.',style:TextStyle(fontWeight:FontWeight.w700)))])),
+    Container(padding:const EdgeInsets.all(18),decoration:BoxDecoration(color:C.bg,borderRadius:BorderRadius.circular(22),boxShadow:const [BoxShadow(color:Color(0xFFD0D8E5),blurRadius:14,offset:Offset(5,5)),BoxShadow(color:Color(0xFFFFFFFF),blurRadius:14,offset:Offset(-5,-5))]),child:const Row(children:[Icon(Icons.local_fire_department,size:32),SizedBox(width:12),Expanded(child:Text('7 day streak\nKeep your momentum going today.',style:TextStyle(fontWeight:FontWeight.w700)))])),
   ]);
 }
 class ActionBox extends StatelessWidget{
   final String title;final IconData icon;final Color color;final VoidCallback onTap;
   const ActionBox(this.title,this.icon,this.color,this.onTap,{super.key});
-  @override Widget build(BuildContext context)=>Expanded(child:InkWell(onTap:onTap,borderRadius:BorderRadius.circular(18),child:Column(children:[
-    Container(margin:const EdgeInsets.symmetric(horizontal:4),height:58,decoration:BoxDecoration(color:color,borderRadius:BorderRadius.circular(18),boxShadow:const [BoxShadow(color:Color(0x1B73809A),blurRadius:14,offset:Offset(5,5)),BoxShadow(color:Color(0xFFFFFFFF),blurRadius:14,offset:Offset(-5,-5))]),child:Icon(icon,color:C.ink)),
-    const SizedBox(height:6),Text(title,style:const TextStyle(fontSize:10,fontWeight:FontWeight.w700))
-  ])));
+  @override Widget build(BuildContext context)=>Expanded(child:Padding(padding:const EdgeInsets.symmetric(horizontal:4),child:InkWell(onTap:onTap,borderRadius:BorderRadius.circular(18),child:Container(padding:const EdgeInsets.symmetric(vertical:14,horizontal:2),decoration:BoxDecoration(color:C.bg,borderRadius:BorderRadius.circular(18),boxShadow:const [BoxShadow(color:Color(0xFFD0D8E5),blurRadius:12,offset:Offset(5,5)),BoxShadow(color:Color(0xFFFFFFFF),blurRadius:12,offset:Offset(-5,-5))]),child:Column(mainAxisSize:MainAxisSize.min,children:[
+    Container(width:42,height:42,decoration:BoxDecoration(color:color,borderRadius:BorderRadius.circular(14)),child:Icon(icon,color:C.ink)),
+    const SizedBox(height:8),Text(title,style:const TextStyle(fontSize:10,fontWeight:FontWeight.w700),textAlign:TextAlign.center)
+  ])))));
 }
 
 class Subjects extends StatelessWidget{
