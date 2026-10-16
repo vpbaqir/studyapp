@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 void main() => runApp(const StudyApp());
 
 class C {
-  static const lavender = Color(0xFFB69AF5), soft = Color(0xFFEDE7FF), blue = Color(0xFFAED8F5),
-      mint = Color(0xFFBEE8D1), yellow = Color(0xFFFFD77A), pink = Color(0xFFF6B8D8),
-      ink = Color(0xFF17171C), bg = Color(0xFFF9F8FC);
+  static const lavender = Color(0xFF7898FF), soft = Color(0xFFE4EAFE), blue = Color(0xFFDCE8F8),
+      mint = Color(0xFFD8F0E8), yellow = Color(0xFFF8E8C9), pink = Color(0xFFF5DFE7),
+      ink = Color(0xFF17213B), bg = Color(0xFFEEF2F9);
 }
 
 class Note { String title, body; Note(this.title, this.body); }
@@ -21,7 +21,7 @@ class _StudyAppState extends State<StudyApp> {
   ThemeMode theme = ThemeMode.light;
   @override Widget build(BuildContext context) => MaterialApp(
     debugShowCheckedModeBanner:false, title:'Study', themeMode:theme,
-    theme:ThemeData(useMaterial3:true,scaffoldBackgroundColor:C.bg,colorScheme:ColorScheme.fromSeed(seedColor:C.lavender)),
+    theme:ThemeData(useMaterial3:true,scaffoldBackgroundColor:C.bg,canvasColor:C.bg,colorScheme:ColorScheme.fromSeed(seedColor:C.lavender,surface:C.bg),appBarTheme:const AppBarTheme(backgroundColor:C.bg,elevation:0)),
     darkTheme:ThemeData(useMaterial3:true,brightness:Brightness.dark,colorScheme:ColorScheme.fromSeed(seedColor:C.lavender,brightness:Brightness.dark)),
     home:HomeShell(onTheme:()=>setState(()=>theme=theme==ThemeMode.light?ThemeMode.dark:ThemeMode.light)),
   );
@@ -103,7 +103,7 @@ class ActionBox extends StatelessWidget{
   final String title;final IconData icon;final Color color;final VoidCallback onTap;
   const ActionBox(this.title,this.icon,this.color,this.onTap,{super.key});
   @override Widget build(BuildContext context)=>Expanded(child:InkWell(onTap:onTap,borderRadius:BorderRadius.circular(18),child:Column(children:[
-    Container(margin:const EdgeInsets.symmetric(horizontal:4),height:58,decoration:BoxDecoration(color:color,borderRadius:BorderRadius.circular(18)),child:Icon(icon,color:C.ink)),
+    Container(margin:const EdgeInsets.symmetric(horizontal:4),height:58,decoration:BoxDecoration(color:color,borderRadius:BorderRadius.circular(18),boxShadow:const [BoxShadow(color:Color(0x1B73809A),blurRadius:14,offset:Offset(5,5)),BoxShadow(color:Color(0xFFFFFFFF),blurRadius:14,offset:Offset(-5,-5))]),child:Icon(icon,color:C.ink)),
     const SizedBox(height:6),Text(title,style:const TextStyle(fontSize:10,fontWeight:FontWeight.w700))
   ])));
 }
@@ -184,7 +184,7 @@ class Profile extends StatelessWidget{
   const Profile({super.key,required this.onTheme,required this.onNotes,required this.onPlan,required this.onCards,required this.onHelp,required this.onSettings});
   @override Widget build(BuildContext c)=>ListView(padding:const EdgeInsets.all(20),children:[
     Header('Profile',Icons.settings,onSettings),const SizedBox(height:18),
-    Container(padding:const EdgeInsets.all(18),decoration:BoxDecoration(color:Theme.of(c).colorScheme.surface,borderRadius:BorderRadius.circular(24)),child:const Row(children:[CircleAvatar(radius:30,backgroundColor:C.soft,child:Icon(Icons.school,size:28)),SizedBox(width:14),Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Student',style:TextStyle(fontSize:18,fontWeight:FontWeight.w800)),Text('Keep learning')])])),
+    Container(padding:const EdgeInsets.all(18),decoration:BoxDecoration(color:Theme.of(c).colorScheme.surface,borderRadius:BorderRadius.circular(24),boxShadow:const [BoxShadow(color:Color(0x1B73809A),blurRadius:16,offset:Offset(6,6)),BoxShadow(color:Color(0xFFFFFFFF),blurRadius:16,offset:Offset(-6,-6))]),child:const Row(children:[CircleAvatar(radius:30,backgroundColor:C.soft,child:Icon(Icons.school,size:28)),SizedBox(width:14),Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Student',style:TextStyle(fontSize:18,fontWeight:FontWeight.w800)),Text('Keep learning')])])),
     const SizedBox(height:15),StatGrid([('12','Subjects',C.soft),('85','Day streak',C.yellow),('240','Hours',C.mint)]),const SizedBox(height:10),
     Item('My Notes',Icons.note_alt_outlined,onNotes),Item('Flashcards',Icons.style_outlined,onCards),Item('Study Plan',Icons.calendar_month_outlined,onPlan),Item('Settings',Icons.settings_outlined,onSettings),Item('Help & Support',Icons.help_outline,onHelp),
     const SizedBox(height:10),OutlinedButton.icon(onPressed:onTheme,icon:const Icon(Icons.dark_mode),label:const Text('Toggle light / dark mode'))
